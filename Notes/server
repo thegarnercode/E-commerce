@@ -1,0 +1,32 @@
+Now create a server.js file in the root directory.
+
+Start building the server.js file.
+Start by completing the required imports of the libraries we would need in this file.
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+const config = require('config');
+Call express app and set it to use in the application.
+
+const app = express();
+app.use(express.json());
+Next; set up the server file to serve static content tol be generated from React app in production.
+
+This will only work in the production environment.
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
+}
+
+Next; configure our server file to connect to the MongoDB database and start running the server to listen to requests on port 4000.
+
+const dbURI = config.get('dbURI');
+const port = process.env.PORT || 4000;
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
+  .then((result) => app.listen(port))
+  .catch((err) => console.log(err));
+We use config to get our Database URI.
+We define a port variable to use any port value present in the environment variable as in production; but in development, we use port 4000.

@@ -1,0 +1,92 @@
+Now, in the third part, we will build the backend part 
+which would handle the authentication and items
+in our web application by building out the APIs
+with the help of Express Router and we will also
+be defining a custom middleware function to check
+whether a user is authenticated or not
+
+
+Inside the routes folder, 
+we would create four files —auth, item, cartandorder.
+These four files would contain the routes relevant 
+to the authentication, items, cart and orders respectively.
+Similarly, we would create four files inside the controllers'folder, 
+one each for each file of routes folder. 
+Those would be —authControllers, itemControllers, cartControllers 
+and orderControllers respectively.
+So, we would now start building our Routes folder 
+which would be simple since we will put all the logic 
+in thecontrollers'folder and not directly in the routes folder
+
+We then have three routes —register, login and user.
+Let’s see how each one functions.
+
+1.register— This route handles a post request in which a user provides his name, 
+email and password for registering in our system.
+
+2.login— This route handles the user login part of the website. 
+It allows users to log in and checks whether the credentials are correct.
+
+3.user— This route is a get request and we try to retrieve 
+whether a user is logged in or not using this route.
+
+
+It has four routes in it. They each handle a specific functionality as we saw above.
+
+1.get_items— This route is a get request and the purpose of this route 
+is to fetch all the items from the server.
+
+2.post_item— This route is a post request and its purpose 
+is to add a new item to the database.
+
+3.update_item— This route is a put request. 
+Its purpose is to update an existing item in the database.
+
+4.delete_item— This route is a delete request and 
+its purpose is to delete an item from the database
+
+
+This would consist of three functions, one each for the three routes we had, 
+each handling the specific purpose. 
+So, we would discuss each of these three functions in detail. 
+But before that, we need to require some things into this file.
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const bcrypt = require('bcrypt');
+
+We require four things as seen above. 
+Let’s discuss the responsibility of each of these:-
+1.User— We require the User model we created inthe previous tutorial. 
+Since we are to deal with users, we will be needing it.
+2.jwt— We require the json web token in our file to create the JSON Web Tokens 
+we need to store to verify whether a user has been authenticated.
+3.config— This is required to bring in the config package to let us access the JSON 
+we stored in the config folder. It lets us store the JWT secret code.
+4.bcrypt— This is required to use the bcrypt library which is needed to hash the passwords 
+before saving them in the database.
+
+This controller file would handle all the logic related to the items 
+— add an item, get all items, delete an item or modify an item.
+This would consist of four functions, one each for the four routes we had, 
+each handling the specific purpose.
+So, we would discuss each of these four functions in detail. 
+We need to require only the Item model in this file.
+const Item = require('../models/Item');
+
+Now, we would start with the function to get all items from the database. 
+We will get all the items and sort themin decreasing order by date added. 
+We then return these items in JSON format.
+module.exports.get_items = (req,res) => {    
+    Item.find().sort({date:-1})
+    .then(items => res.json(items));}
+    
+    Next, we would be dealing with adding a new item to the cart. 
+    We will use the request’s body as the input for the new item 
+    since we are sending the request body from frontend in the same format as in our model. 
+    We could have deconstructed the request body and then provided 
+    the data while creating the new item as we did for the user but 
+    this was a cleaner way to do it
+
+    Next, we would be dealing with adding a new item to the cart. We will use the request’s body as the input for the new item since we are sending the request body from frontend in the same format as in our model. We could have deconstructed the request body and then provided the data while creating the new item as we did for the user but this was a cleaner way to do it.12
+We then save the item in the database and send the new item as the response in JSON format.module.exports.post_item = (req,res) => {    const newItem = new Item(req.body);    newItem.save().then(item => res.json(item))

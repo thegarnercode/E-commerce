@@ -1,0 +1,32 @@
+install these Dependencies
+
+#bcrypt — We will uthenticate users in our application. 
+We need to store the password of users in the database. 
+So, it is never recommended to store plain text passwords because 
+they can be compromised easily.
+So; we use bcrypt library to hash the passwords before we save them. 
+We will discuss in more detail into when we use it.
+
+#concurrently — This package helps run two processes at the same. We will run both our server and client at the same time without using two separate terminals.
+
+#config — Store important data like secret keys, database ID, in a separate JSON file and access it easily within any file.
+
+#express — Use on top of Node to build REST APIs.
+
+#jsonwebtoken — Create JWTs for authentication.
+
+#mongoose — Establish a connection between MongoDB and our Express app.
+
+#validator — Validate items such as emails.
+
+#nodemon — Keep server running andupdates server when any changes are detected.
+
+We added scripts to make it easier to run the server and client:
+
+#start — Uses node to run the server.js file.
+
+#server — Uses nodemon to run the server.js file to update changes and restart the server automatically.
+
+#client — Runs the client. Use a prefix to indicate first moving into client folder and then run the command.
+
+#dev — Uses concurrently to run both the server and client at the same time.
