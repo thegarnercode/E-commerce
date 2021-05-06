@@ -1,0 +1,54 @@
+In the fourth part, we will build the REST APIs 
+required for the handling cart and the orders in this project. 
+We will be using Stripe Checkout to handle payments.
+
+We will deal with each route one by one:
+
+get_cart_items — This route makes a get request which fetches all the items in the cart of a particular user. The id of the user requesting cart is passed along as a param. So, we find the user’s cart and return all the cart items.
+add_cart_item — This route makes a post request which is used to add an item to the cart. It also has a param id to identify which user is adding the item to the cart and thus we can find cart and add the item to cart or create a new cart.
+delete_item — This is a delete request and it removes an item from the cart. It takes in two params; userId and itemId. userId is used to get the cart of that particular user and itemId is used to search for that item and remove it from the cart.
+
+
+
+
+
+This file will deal with all the routes we need for handling our orders. 
+It has two routes; getting all our orders and placing an order (checkout).
+Let’s check these two routes one by one:
+
+get_orders — It is a get request and fetches all the orders 
+we have made till now in our application. 
+It accepts a param id which is the userId which helps us to return 
+the correct user’s orders.
+
+checkout — It is a post request which also has a param id for finding the user. 
+Its function is to create a new order. 
+All the payments part is handled by this route. 
+We will see those in its controller.
+
+
+This controller file will handle all the logic for the cart. 
+It will handle adding items to cart, 
+deleting items from the cart, 
+and getting the cart items to display along with the total cost.
+
+This consists of three functions, 
+one each for the three routes we had, 
+each handling the specific purpose.
+
+Let's discuss each of these three functions in detail. But before that, we need to require the Cart and the Item models in this file.
+
+const Cart = require('../models/Cart');
+const Item = require('../models/Item');
+
+
+This controller file handles all the logic for the orders.
+
+It handles viewing all our orders and also will allow us to place a new order from the items we have in our cart, and we handle payments via Stripe Checkout.
+This consists of two functions, one each for the two routes we had, each handling the specific purpose.
+
+Before moving forward, we would need to install the Stripe library into our application.
+
+We use npm install stripe to install stripe.
+It will save it as a dependency in our package.json file.
+Also, we need to add StripeAPIKey in our config file. Our updated default.json file inside of the config folder would be:

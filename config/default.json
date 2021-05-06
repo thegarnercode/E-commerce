@@ -1,3 +1,5 @@
 {
-    "dbURI": "YOUR_DATABASE_URI"
+    "dbURI": "YOUR_DATABASE_URI",
+    "jwtsecret": "your jwt secret",
+    "StripeApiKey": "sk_test_51IoD2ICHQ7Ft1zGG8z78HNhoycvrc1doeboLXe70gABsLP869n4VqmDs8LB2HR8LZ6Bjvas4jW7zjIuDdX7ku15W00EFVDmL86"
     }

@@ -1,0 +1,124 @@
+We start focusing on the frontend part. We start setting up the client side of our project with React and will also make use of the Redux library to manage all our state in the React application.
+
+First, we make a new folder inside our root folder (where we have all our backend files). We will name this folder as ‘client’ and we will have all files related to the client-side inside this folder.
+
+We use create-react-app to set up a React project.
+
+Using this command will make the process much easier and we will be able to focus on the things that really matter.
+After creating the folder named client, move into that folder and run the following command to create a new react app inside the folder.
+
+Let’s go through them one by one to see what we installed and what function they serve.
+
+JSON DEPENDENCIES
+
+Axios — Used to interact with the REST APIs and fetch the data from the server.
+
+Bootstrap — Te frontend CSS library we will be using to design the frontend.
+
+redux — The state management library we will be using to manage our state.
+
+react-redux — The React version of Redux used to manage the state in our application. 
+(since Redux can be used with various frameworks and libraries. This one is for React.)
+
+react-router-dom — Manage the routes of our application. 
+It will help us define routes and allow them to go from one route to another.
+
+redux-thunk — The middleware we will use in our application tol help us in state management 
+of the application.
+
+reactstrap — The React version for Bootstrap styling which allows us to use Bootstrap 
+classes as React components.
+
+react-stripe-checkout — For using Stripe to accept payments in our application.
+
+We imported something we have not actually created till now; 
+the rootReducer file from reducers folder. We will make that in a while.
+
+We do not need to visit this file again for any purpose.
+It is the standard way to set up a Redux store.
+Now we start building the actions folder inside the src folder.
+
+This is standard Redux way to have store, actions, and reducers.
+First we start with the types.js file inside the actions folder.
+
+
+Here we define all the action types.
+
+export const GET_ITEMS = 'GET_ITEMS';
+
+export const ADD_ITEM = 'ADD_ITEM';
+
+export const DELETE_ITEM = 'DELETE_ITEM';
+
+
+export const UPDATE_ITEM = 'UPDATE_ITEM';
+
+export const ITEMS_LOADING = 'ITEMS_LOADING';
+
+export const CART_LOADING = 'CART_LOADING';
+
+export const GET_CART = 'GET_CART';
+
+ETC..
+
+
+errorActions
+
+We have two functions in this actions file. 
+We have one for returning any error we have 
+in our application and the next is for clearing out these errors 
+when we do not need to display them.
+
+The first function will take a message, status, and id in the function 
+and will return them as payload with the type of GET_ERRORS.
+
+The next function will clear the errors by sending the type as CLEAR_ERRORS.
+
+It has five functions to manage fetching items, 
+adding a new item, deleting an item, 
+updating an item, and for setting items state as loading.
+
+getItems — Used for fetching all the items from the backend 
+using API endpoint. We set items as loading and then we reach the 
+API endpoint to get all items. We then set the type as GET_ITEMS and set payload 
+as the data received as a response.
+
+addItem — Used for adding a new item to the database. 
+We take in the item object through frontend forms and then send this data 
+to the API endpoint responsible for adding the item. 
+We then set the type as ADD_ITEM and set payload as the data received from the response.
+
+deleteItem — Used to delete an existing item from the database. 
+It takes in the id of the item we want to delete and sends the id using 
+a delete request to the API endpoint meant for this purpose. 
+We then set the type as DELETE_ITEM and the payload as the id of the item which was deleted.
+
+updateItem — Used to update an existing item present in our inventory. 
+It makes a put request to the API endpoint with the help of id and 
+also sends in the new item object. We then set the type as UPDATE_ITEM and 
+set payload as the id and the data we receive as the response from the server.
+
+setItemsLoading — Sets the type as ITEMS_LOADING.
+
+cartActions
+
+This handles all the actions related to the cart of any user.
+
+It has four functions which are getting the cart, adding items to cart, deleting items from the cart, and set the cart status to loading.
+getCart — Used to fetch the cart for any user. First of all, we set cart as loading. This function passes on the id as a param with the API endpoint and receives a response consisting of the cart of the user. We set the type as GET_CART.
+addToCart — Used to add an item to cart. It takes in the id of the user which it uses as param and also passes on the productId and quantity as the request body. We then receive a response which we assign to the payload and set the type as ADD_TO_CART.
+deleteFromCart — Used to delete an item from the cart. It takes in the userId and the itemId and passes these as params to the API endpoint. We then set the type to DELETE_FROM_CART and set payload as the response’s data.
+setCartLoading — Sets the type as CART_LOADING.
+(cartActions.js)
+
+orderActions
+
+This action file handles all the actions related to the orders in our application.
+
+It has three functions which are used to get all orders of a user, place a new order (checkout), and set the orders as loading.
+
+getOrders — Sets the orders as loading. Next, it uses the id of the user received to use it as a param in making a GET request. We then set the type as GET_ORDERS and set payload as data received as the response.
+
+checkout — Used to place an order. It receives two parameters from the components which are the id of the user and source. The source is generated from stripe checkout functions which we will deal with in detail when we actually create them in the later part. We then use the id as a param and source as request body and make a POST request. We then set the type as CHECKOUT and set the payload as response’s data.
+
+setOrdersLoading — Sets the order type as ORDERS_LOADING.
