@@ -1,0 +1,103 @@
+Let’s start to build the reducer files first.
+
+We create a folder inside the client folder which we would name as reducers.
+Inside this folder, we would create six files; index, authReducer, itemReducer, errorReducer, cartReducer, and orderReducer.
+
+First is the auth reducer file.
+-Start by importing all the types we need for authentication from the types file of the actions folder.
+
+Set up an initial state where we retrieve the token from the local storage.
+
+set isAuthenticated to null and isLoading to false.
+Set the user field as false, to begin with.
+
+ItemReducer
+- itemReducer file to handle all the tasks related to items in this application.
+- We will import all the types related to items first.
+- Set up an initial state where we set the items to an empty array and set loading to false.
+
+
+ErrorReducer
+- n this reducer, we manage the errors part of the application.
+
+We import both the error related types.
+Then, we define an initial state with a msg set to empty object, status set to null, and id also set to null.
+
+We have two cases to deal with. The first case deals with getting errors and the next case is for clearing errors.
+
+
+CartReducer
+- In this file, we deal with the reducers related to the cart of the user.
+
+We import the types related to the cart from the types file we defined in the actions folder.
+Define the initial state with the cart set to null and the loading set to false.
+
+
+OrderReducer
+- In this file, we deal with the reducers related to the orders in our application.
+
+We first import all the relevant types for the orders.
+
+Then define an initial state and define orders as an empty array and also define loading and set it to false.
+
+Index (Combining Reducers)
+- In this file, we import all the reducers from all the different files; items, cart, order, auth, and error
+
+Then combine them using the combineReducers function we got from redux.
+
+*** We have finished all the redux work. We can focus on building components for our application.
+
+
+We will deal with the components needed for authentication in this part, and with all the other components in the next part of the series.
+
+First; we create a folder called components inside the client folder.
+
+Since we keep all the authentication components separate from the rest of our components, we will make another folder named auth inside the components folder.
+
+
+Login Modal
+
+We will build our login component in this file.
+
+- We import Component from React.
+- We import various items from Reactstrap we will use to make our component.
+- We also import connect from react-redux.
+- We also import PropTypes to define all the prop types we will use in this file.
+- Also, we import login and clearError actions.
+
+Define a state with email and name set to empty strings.
+
+We also have modal set to false and msg set to null.
+Define all our prop types.
+
+We then set up the componentDidUpdate and take in the previous props as a parameter.
+Then check if the current error object is equal to the previous error.
+If no; we check whether the error is from LOGIN_FAIL and if yes, we set the msg as error’s msg, else, we set msg to null.
+Check if we are authenticated or not.
+
+If yes we close the modal.
+Set up a toggle function to toggle the state of the modal.
+
+Set up an onChange function to update the value of the email and password as we type in the form fields.
+Set up an onSubmit function which takes in the email and password from the state and passes them to the login action.
+
+Next, we have the JSX code to display our modal and the form within the modal.
+
+In the form, we have two input fields; email and password.
+We also have a submit button.
+After that, define a mapStateToProps and get the isAuthenticated and error from the state we set up in the reducer files. Finally, we connect the LoginModal to these state and the action functions and export it.
+
+RegisterModal
+This will handle the registration on our website.
+
+- It will be very similar to the login modal so we will not go into details.
+- There will be just a few differences; use the register action instead of the login action.
+- And we have three fields this time; name, email, and password.
+   - Our form will have three input fields.
+
+   Logout
+   - This one is simple. It uses a NavLink and a Button that displays Logout.
+
+On clicking it calls the logout action.
+Connect it with the logout action and then export it.
+
