@@ -1,24 +1,42 @@
 Now, in the third part, we will build the backend part 
+
 which would handle the authentication and items
+
 in our web application by building out the APIs
+
 with the help of Express Router and we will also
+
 be defining a custom middleware function to check
+
 whether a user is authenticated or not
 
 
+
 Inside the routes folder, 
+
 we would create four files —auth, item, cartandorder.
+
 These four files would contain the routes relevant 
+
 to the authentication, items, cart and orders respectively.
+
 Similarly, we would create four files inside the controllers'folder, 
+
 one each for each file of routes folder. 
+
 Those would be —authControllers, itemControllers, cartControllers 
+
 and orderControllers respectively.
+
 So, we would now start building our Routes folder 
+
 which would be simple since we will put all the logic 
+
 in thecontrollers'folder and not directly in the routes folder
 
+
 We then have three routes —register, login and user.
+
 Let’s see how each one functions.
 
 1.register— This route handles a post request in which a user provides his name, 
